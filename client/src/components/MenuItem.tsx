@@ -56,7 +56,7 @@ export default function MenuItem({
     <Card className={`overflow-hidden shadow-sm ${isCompact ? 'h-full' : ''}`}>
       <div className="relative">
         <img 
-          src={imageUrl || defaultImage} 
+          src={imageUrl || "https://images.unsplash.com/photo-1546069901-ba9599a7e63c"} 
           alt={name} 
           className={`w-full ${isCompact ? 'h-24' : 'h-40'} object-cover`}
         />
