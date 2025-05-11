@@ -105,6 +105,7 @@ export default function MenuItems({ categoryId }: MenuItemsProps) {
       }
     ],
     4: [ // Drinks
+      // Alcoholic Drinks
       {
         id: 401,
         name: "Craft Mojito",
@@ -112,7 +113,8 @@ export default function MenuItems({ categoryId }: MenuItemsProps) {
         price: 11.99,
         imageUrl: "https://images.unsplash.com/photo-1509961141617-c51d46ef6bfc",
         available: true,
-        categoryId: 4
+        categoryId: 4,
+        subcategory: "Alcohol"
       },
       {
         id: 402,
@@ -121,7 +123,81 @@ export default function MenuItems({ categoryId }: MenuItemsProps) {
         price: 8.99,
         imageUrl: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3",
         available: true,
-        categoryId: 4
+        categoryId: 4,
+        subcategory: "Alcohol"
+      },
+      {
+        id: 403,
+        name: "Craft Beer Selection",
+        description: "Local IPA, Stout, or Lager",
+        price: 7.99,
+        imageUrl: "https://images.unsplash.com/photo-1608270586620-248524c67de9",
+        available: true,
+        categoryId: 4,
+        subcategory: "Alcohol"
+      },
+      // Non-Alcoholic Drinks
+      {
+        id: 404,
+        name: "Fresh Lemonade",
+        description: "Homemade lemonade with mint and honey",
+        price: 4.99,
+        imageUrl: "https://images.unsplash.com/photo-1621263764928-df1444c5e859",
+        available: true,
+        categoryId: 4,
+        subcategory: "Non-Alcohol"
+      },
+      {
+        id: 405,
+        name: "Sparkling Water",
+        description: "Premium sparkling water with choice of flavoring",
+        price: 3.99,
+        imageUrl: "https://images.unsplash.com/photo-1598343175492-9e7dc0e63cc2",
+        available: true,
+        categoryId: 4,
+        subcategory: "Non-Alcohol"
+      },
+      // Tea/Coffee
+      {
+        id: 406,
+        name: "Artisan Coffee",
+        description: "Freshly ground premium coffee beans",
+        price: 4.50,
+        imageUrl: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085",
+        available: true,
+        categoryId: 4,
+        subcategory: "Tea/Coffee"
+      },
+      {
+        id: 407,
+        name: "Green Tea",
+        description: "Premium Japanese green tea",
+        price: 3.99,
+        imageUrl: "https://images.unsplash.com/photo-1627435601361-ec25f5b1d0e5",
+        available: true,
+        categoryId: 4,
+        subcategory: "Tea/Coffee"
+      },
+      // Punch
+      {
+        id: 408,
+        name: "Tropical Punch",
+        description: "Blend of tropical fruits with coconut water",
+        price: 5.99,
+        imageUrl: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd",
+        available: true,
+        categoryId: 4,
+        subcategory: "Punch"
+      },
+      {
+        id: 409,
+        name: "Berry Blast Punch",
+        description: "Mixed berry punch with fresh mint",
+        price: 5.99,
+        imageUrl: "https://images.unsplash.com/photo-1497534446932-c925b458314e",
+        available: true,
+        categoryId: 4,
+        subcategory: "Punch"
       }
     ]
   };
