@@ -1,23 +1,46 @@
+
 import Layout from "@/components/Layout";
+import RestaurantBanner from "@/components/RestaurantBanner";
+import { Button } from "@/components/ui/button";
+import { useCart } from "@/context/CartContext";
 
 export default function Breakfast() {
+  const { addItem } = useCart();
+
+  const menuItems = [
+    { id: 1, name: "Farm Fresh Eggs (Any Style)", price: 8.99, description: "Farm fresh eggs cooked to your preference", imageUrl: "https://images.unsplash.com/photo-1587657565520-6c0c826be005", available: true, categoryId: 1 },
+    { id: 2, name: "Premium Pork Sausages", price: 7.99, description: "Grilled premium pork sausages", imageUrl: "https://images.unsplash.com/photo-1625938145744-e380515399b7", available: true, categoryId: 1 },
+    { id: 3, name: "Homemade Fried Bakes", price: 6.99, description: "Traditional fried bakes, served hot", imageUrl: "https://images.unsplash.com/photo-1509440159596-0249088772ff", available: true, categoryId: 1 },
+    { id: 4, name: "Artisan Toast Bread with Butter", price: 4.99, description: "Freshly baked artisan bread, toasted and served with butter", imageUrl: "https://images.unsplash.com/photo-1525351484163-7529414344d8", available: true, categoryId: 1 },
+    { id: 5, name: "Crispy Bacon Strips", price: 7.99, description: "Crispy fried bacon strips", imageUrl: "https://images.unsplash.com/photo-1528607929212-2636ec44253e", available: true, categoryId: 1 },
+  ];
+
   return (
     <Layout>
+      <RestaurantBanner />
       <div className="p-6">
         <h1 className="text-3xl font-bold mb-6">Breakfast Menu</h1>
         <p className="text-gray-600 mb-8">Served until 11:00 AM</p>
 
         <div className="space-y-4">
-          {[
-            { name: "Farm Fresh Eggs (Any Style)", price: 8.99 },
-            { name: "Premium Pork Sausages", price: 7.99 },
-            { name: "Homemade Fried Bakes", price: 6.99 },
-            { name: "Artisan Toast Bread with Butter", price: 4.99 },
-            { name: "Crispy Bacon Strips", price: 7.99 },
-          ].map((item) => (
-            <div key={item.name} className="flex justify-between items-center border-b border-gray-200 pb-2">
-              <span className="text-lg text-gray-800">{item.name}</span>
-              <span className="text-lg font-medium text-gray-900">${item.price.toFixed(2)}</span>
+          {menuItems.map((item) => (
+            <div key={item.name} className="flex justify-between items-center border rounded-lg p-4 hover:bg-gray-50">
+              <div className="flex items-center gap-4">
+                <div className="w-16 h-16 rounded-lg overflow-hidden">
+                  <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-medium text-gray-800">{item.name}</h3>
+                  <p className="text-sm text-gray-600">{item.description}</p>
+                  <p className="text-lg font-medium text-gray-900 mt-1">${item.price.toFixed(2)}</p>
+                </div>
+              </div>
+              <Button 
+                onClick={() => addItem(item)}
+                className="ml-4"
+              >
+                Add to Order
+              </Button>
             </div>
           ))}
         </div>
