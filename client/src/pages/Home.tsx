@@ -22,6 +22,19 @@ export default function Home() {
       <RestaurantBanner />
       <SpecialBanner />
       
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
+        <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+          <h2 className="text-2xl font-semibold mb-2">Breakfast</h2>
+          <p className="text-gray-600 mb-4">Start your day with our delicious breakfast options</p>
+          <p className="text-sm text-gray-500">Served until 11:00 AM</p>
+        </div>
+        <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+          <h2 className="text-2xl font-semibold mb-2">Lunch</h2>
+          <p className="text-gray-600 mb-4">Enjoy our fresh and satisfying lunch menu</p>
+          <p className="text-sm text-gray-500">Served 11:00 AM - 3:00 PM</p>
+        </div>
+      </div>
+      
       <MenuSection onCategoryChange={setSelectedCategory} />
       <MenuItems categoryId={selectedCategory} />
     </Layout>
