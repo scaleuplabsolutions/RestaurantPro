@@ -58,12 +58,19 @@ export default function Profile() {
       
       {isAdmin && (
         <Button 
-          className="mt-4 w-full py-2 bg-secondary hover:bg-secondary/90 text-white"
+          className="mt-4 w-full py-2 bg-primary hover:bg-primary/90 text-white"
           onClick={goToAdmin}
         >
           Go to Admin Dashboard
         </Button>
       )}
+
+      <Button 
+        className="mt-4 w-full py-2 bg-red-500 hover:bg-red-600 text-white"
+        onClick={logout}
+      >
+        Logout
+      </Button>
       
       <div className="bg-white border rounded-lg p-4 mt-4">
         <h3 className="font-medium mb-3">Account Settings</h3>
