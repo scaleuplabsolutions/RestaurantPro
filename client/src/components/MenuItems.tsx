@@ -12,6 +12,7 @@ type DrinkType = 'alcohol' | 'non-alcohol' | 'tea-coffee' | 'punch' | null;
 
 export default function MenuItems({ categoryId }: MenuItemsProps) {
   const [drinkType, setDrinkType] = useState<DrinkType>(null);
+  const [showCombos, setShowCombos] = useState<boolean>(false);
 
   // Fetch all menu items
   const { data: allItems, isLoading: isLoadingAll } = useQuery({
@@ -30,6 +31,7 @@ export default function MenuItems({ categoryId }: MenuItemsProps) {
 
   // Check if this is the Drinks category (ID: 4)
   const isDrinksCategory = categoryId === 4;
+  const isLunchCategory = categoryId === 2;
 
   // Define drink subcategories with their UI elements
   const drinkSubcategories = [
@@ -323,9 +325,62 @@ export default function MenuItems({ categoryId }: MenuItemsProps) {
     : items;
 
   // Render the full component with real data
+  const LunchComboMenu = () => {
+    if (!isLunchCategory) return null;
+
+    return (
+      <div className="mb-4">
+        <button
+          onClick={() => setShowCombos(!showCombos)}
+          className={`p-3 rounded-md text-sm font-medium transition-all shadow-sm w-full
+            ${showCombos 
+              ? 'bg-purple-100 border border-purple-300 text-purple-800' 
+              : 'bg-gray-100 border border-gray-300 text-gray-800 hover:bg-gray-200'}`}
+        >
+          <span className="block text-xl mb-1">🍱</span>
+          Lunch Combos
+        </button>
+      </div>
+    );
+  };
+
+  // Add demo lunch combos
+  if (isLunchCategory && showCombos) {
+    demoItems[2] = [
+      {
+        id: 601,
+        name: "Power Lunch Combo",
+        description: "Grilled chicken breast, side salad, soup of the day, and iced tea",
+        price: 18.99,
+        imageUrl: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c",
+        available: true,
+        categoryId: 2
+      },
+      {
+        id: 602,
+        name: "Executive Combo",
+        description: "Premium steak, roasted vegetables, mashed potatoes, and dessert",
+        price: 24.99,
+        imageUrl: "https://images.unsplash.com/photo-1544025162-d76694265947",
+        available: true,
+        categoryId: 2
+      },
+      {
+        id: 603,
+        name: "Vegetarian Delight Combo",
+        description: "Quinoa bowl, vegetable soup, fresh fruit, and kombucha",
+        price: 16.99,
+        imageUrl: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd",
+        available: true,
+        categoryId: 2
+      }
+    ];
+  }
+
   return (
     <div className="p-3">
       {isDrinksCategory && <DrinkSubmenu />}
+      {isLunchCategory && <LunchComboMenu />}
 
       <div className="grid grid-cols-1 gap-4">
         {filteredItems.length === 0 ? (
