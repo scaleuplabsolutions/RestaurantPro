@@ -16,7 +16,21 @@ export default function Lunch() {
     <Layout>
       <div className="p-6">
         <h1 className="text-3xl font-bold mb-6">Lunch Menu</h1>
-        <p className="text-gray-600 mb-8">Served 11:00 AM - 3:00 PM</p>
+        <p className="text-gray-600 mb-4">Served 11:00 AM - 3:00 PM</p>
+        
+        <div className="mb-8">
+          <a href="/combos" className="block bg-gradient-to-br from-yellow-100 to-yellow-200 rounded-lg shadow-md p-6 hover:shadow-xl transition-all transform hover:-translate-y-1 border-2 border-yellow-300">
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="text-2xl font-semibold text-yellow-800">Daily Lunch Combos</h2>
+                <p className="text-yellow-700 mt-1">Special combinations at great prices!</p>
+              </div>
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-yellow-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
+          </a>
+        </div>
         <div className="grid grid-cols-1 gap-4">
           <MenuItem
             id={4}

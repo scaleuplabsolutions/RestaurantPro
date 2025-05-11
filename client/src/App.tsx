@@ -29,6 +29,7 @@ function Router() {
       <Route path="/profile" component={Profile} />
       <Route path="/breakfast" component={Breakfast} />
       <Route path="/lunch" component={Lunch} />
+      <Route path="/combos" component={Combos} />
 
       {/* Admin Routes */}
       <Route path="/admin" component={AdminDashboard} />
