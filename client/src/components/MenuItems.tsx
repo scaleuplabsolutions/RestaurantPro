@@ -7,8 +7,11 @@ interface MenuItemsProps {
   categoryId: number | null;
 }
 
+// Define drink subcategory types
+type DrinkType = 'alcohol' | 'non-alcohol' | 'tea-coffee' | 'punch' | null;
+
 export default function MenuItems({ categoryId }: MenuItemsProps) {
-  const [drinkType, setDrinkType] = useState<string | null>(null);
+  const [drinkType, setDrinkType] = useState<DrinkType>(null);
   
   // Fetch all menu items
   const { data: allItems, isLoading: isLoadingAll } = useQuery({
@@ -27,26 +30,14 @@ export default function MenuItems({ categoryId }: MenuItemsProps) {
   
   // Check if this is the Drinks category (ID: 4)
   const isDrinksCategory = categoryId === 4;
-
-  if (isLoading) {
-    return (
-      <div className="p-3">
-        <div className="grid grid-cols-1 gap-4">
-          {[1, 2, 3].map((i) => (
-            <div key={i} className="border rounded-lg overflow-hidden">
-              <Skeleton className="h-40 w-full" />
-              <div className="p-3">
-                <Skeleton className="h-5 w-2/3 mb-2" />
-                <Skeleton className="h-4 w-full mb-1" />
-                <Skeleton className="h-4 w-4/5 mb-3" />
-                <Skeleton className="h-10 w-full" />
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  }
+  
+  // Define drink subcategories with their UI elements
+  const drinkSubcategories = [
+    { id: 'alcohol' as DrinkType, name: 'Alcohol', icon: '🍷' },
+    { id: 'non-alcohol' as DrinkType, name: 'Non-Alcohol', icon: '🧃' },
+    { id: 'tea-coffee' as DrinkType, name: 'Tea/Coffee', icon: '☕' },
+    { id: 'punch' as DrinkType, name: 'Punch', icon: '🍹' }
+  ];
 
   // Demo menu items for each category
   const demoItems: Record<number, Array<any>> = {
@@ -110,8 +101,7 @@ export default function MenuItems({ categoryId }: MenuItemsProps) {
         categoryId: 3
       }
     ],
-    4: [ // Drinks
-      // Alcoholic Drinks
+    4: [ // Drinks with subcategory property
       {
         id: 401,
         name: "Craft Mojito",
@@ -120,7 +110,7 @@ export default function MenuItems({ categoryId }: MenuItemsProps) {
         imageUrl: "https://images.unsplash.com/photo-1509961141617-c51d46ef6bfc",
         available: true,
         categoryId: 4,
-        subcategory: "Alcohol"
+        subcategory: "alcohol" // Matches the DrinkType
       },
       {
         id: 402,
@@ -130,7 +120,7 @@ export default function MenuItems({ categoryId }: MenuItemsProps) {
         imageUrl: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3",
         available: true,
         categoryId: 4,
-        subcategory: "Alcohol"
+        subcategory: "alcohol"
       },
       {
         id: 403,
@@ -140,9 +130,8 @@ export default function MenuItems({ categoryId }: MenuItemsProps) {
         imageUrl: "https://images.unsplash.com/photo-1608270586620-248524c67de9",
         available: true,
         categoryId: 4,
-        subcategory: "Alcohol"
+        subcategory: "alcohol"
       },
-      // Non-Alcoholic Drinks
       {
         id: 404,
         name: "Fresh Lemonade",
@@ -151,7 +140,7 @@ export default function MenuItems({ categoryId }: MenuItemsProps) {
         imageUrl: "https://images.unsplash.com/photo-1621263764928-df1444c5e859",
         available: true,
         categoryId: 4,
-        subcategory: "Non-Alcohol"
+        subcategory: "non-alcohol"
       },
       {
         id: 405,
@@ -161,9 +150,8 @@ export default function MenuItems({ categoryId }: MenuItemsProps) {
         imageUrl: "https://images.unsplash.com/photo-1598343175492-9e7dc0e63cc2",
         available: true,
         categoryId: 4,
-        subcategory: "Non-Alcohol"
+        subcategory: "non-alcohol"
       },
-      // Tea/Coffee
       {
         id: 406,
         name: "Artisan Coffee",
@@ -172,7 +160,7 @@ export default function MenuItems({ categoryId }: MenuItemsProps) {
         imageUrl: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085",
         available: true,
         categoryId: 4,
-        subcategory: "Tea/Coffee"
+        subcategory: "tea-coffee"
       },
       {
         id: 407,
@@ -182,9 +170,8 @@ export default function MenuItems({ categoryId }: MenuItemsProps) {
         imageUrl: "https://images.unsplash.com/photo-1627435601361-ec25f5b1d0e5",
         available: true,
         categoryId: 4,
-        subcategory: "Tea/Coffee"
+        subcategory: "tea-coffee"
       },
-      // Punch
       {
         id: 408,
         name: "Tropical Punch",
@@ -193,7 +180,7 @@ export default function MenuItems({ categoryId }: MenuItemsProps) {
         imageUrl: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd",
         available: true,
         categoryId: 4,
-        subcategory: "Punch"
+        subcategory: "punch"
       },
       {
         id: 409,
@@ -203,93 +190,165 @@ export default function MenuItems({ categoryId }: MenuItemsProps) {
         imageUrl: "https://images.unsplash.com/photo-1497534446932-c925b458314e",
         available: true,
         categoryId: 4,
-        subcategory: "Punch"
+        subcategory: "punch"
       }
     ]
   };
 
-  if (!items || items.length === 0) {
-    // Show demo items for the selected category
-    const demoForCategory = categoryId ? demoItems[categoryId as keyof typeof demoItems] : [];
-    
-    if (demoForCategory && demoForCategory.length > 0) {
-      // Special handling for drinks category (id: 4)
-      const drinkItems = demoItems[4] || [];
-      const drinkCategories = {
-        'Alcohol': drinkItems.filter(item => item.subcategory === 'Alcohol'),
-        'Non-Alcohol': drinkItems.filter(item => item.subcategory === 'Non-Alcohol'),
-        'Tea/Coffee': drinkItems.filter(item => item.subcategory === 'Tea/Coffee'),
-        'Punch': drinkItems.filter(item => item.subcategory === 'Punch')
-      };
-
-      if (categoryId === 4) {
-        return (
-          <div className="p-3">
-            {Object.entries(drinkCategories).map(([category, items]) => (
-              <div key={category} className="mb-6">
-                <h3 className="text-lg font-semibold mb-3 text-purple-800">{category}</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {items.map((item: any) => (
-                    <MenuItem key={item.id} {...item} isCompact={true} />
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        );
-      }
-
-      return (
-        <div className="p-3">
-          {categoryId === 4 && (
-            <div className="mb-6">
-              <h3 className="text-lg font-semibold mb-3">Drinks Categories</h3>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
-                {Object.entries(drinkCategories).map(([category, items]) => (
-                  <div
-                    key={category}
-                    className="p-3 bg-purple-50 rounded-lg cursor-pointer hover:bg-purple-100 transition-colors"
-                  >
-                    <h4 className="font-medium text-purple-800">{category}</h4>
-                    <p className="text-sm text-purple-600">{items.length} items</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-          <div className="grid grid-cols-1 gap-4">
-            {demoForCategory.map((item: any) => (
-              <MenuItem key={item.id} {...item} />
-            ))}
-          </div>
-        </div>
-      );
-    }
-    
+  // Render loading skeleton
+  if (isLoading) {
     return (
       <div className="p-3">
-        <div className="text-center py-10">
-          <p className="text-neutral-500">No menu items found in this category.</p>
+        <div className="grid grid-cols-1 gap-4">
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="border rounded-lg overflow-hidden">
+              <Skeleton className="h-40 w-full" />
+              <div className="p-3">
+                <Skeleton className="h-5 w-2/3 mb-2" />
+                <Skeleton className="h-4 w-full mb-1" />
+                <Skeleton className="h-4 w-4/5 mb-3" />
+                <Skeleton className="h-10 w-full" />
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     );
   }
 
+  // Render the drinks submenu
+  const DrinkSubmenu = () => {
+    if (!isDrinksCategory) return null;
+    
+    return (
+      <div className="mb-4">
+        <h3 className="text-lg font-semibold mb-3 text-gray-800">Drink Types</h3>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+          {drinkSubcategories.map((subcat) => (
+            <button
+              key={subcat.id}
+              onClick={() => setDrinkType(drinkType === subcat.id ? null : subcat.id)}
+              className={`
+                p-3 rounded-md text-sm font-medium transition-all shadow-sm
+                ${drinkType === subcat.id 
+                  ? 'bg-purple-100 border border-purple-300 text-purple-800' 
+                  : 'bg-gray-100 border border-gray-300 text-gray-800 hover:bg-gray-200'}
+              `}
+            >
+              <span className="block text-xl mb-1">{subcat.icon}</span>
+              {subcat.name}
+            </button>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
+  // Use demo items if no real items are available
+  if (!items || items.length === 0) {
+    const demoForCategory = categoryId ? demoItems[categoryId] || [] : [];
+    
+    if (demoForCategory.length === 0) {
+      return (
+        <div className="p-3">
+          {isDrinksCategory && <DrinkSubmenu />}
+          <div className="text-center py-10">
+            <p className="text-neutral-500">No menu items found in this category.</p>
+          </div>
+        </div>
+      );
+    }
+    
+    // Filter demo items by drink type if applicable
+    const filteredDemoItems = isDrinksCategory && drinkType
+      ? demoForCategory.filter(item => item.subcategory === drinkType)
+      : demoForCategory;
+      
+    return (
+      <div className="p-3">
+        {isDrinksCategory && <DrinkSubmenu />}
+        
+        <div className="grid grid-cols-1 gap-4">
+          {filteredDemoItems.length === 0 ? (
+            <div className="text-center py-10">
+              <p className="text-neutral-500">
+                {isDrinksCategory && drinkType 
+                  ? `No ${drinkType} drinks found.` 
+                  : "No items found in this category."}
+              </p>
+            </div>
+          ) : (
+            filteredDemoItems.map((item: any) => (
+              <MenuItem 
+                key={item.id}
+                id={item.id}
+                name={item.name}
+                description={item.description}
+                price={item.price}
+                imageUrl={item.imageUrl}
+                available={item.available}
+                categoryId={item.categoryId}
+              />
+            ))
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  // Filter real items by drink type if applicable
+  const filteredItems = isDrinksCategory && drinkType
+    ? items.filter((item: any) => {
+        const name = item.name.toLowerCase();
+        const description = (item.description || '').toLowerCase();
+        
+        switch(drinkType) {
+          case 'alcohol':
+            return name.includes('wine') || name.includes('beer') || 
+                   name.includes('cocktail') || name.includes('liquor') ||
+                   name.includes('mojito') || description.includes('rum');
+          case 'non-alcohol':
+            return name.includes('juice') || name.includes('soda') || 
+                   name.includes('water') || name.includes('lemonade');
+          case 'tea-coffee':
+            return name.includes('tea') || name.includes('coffee') || 
+                   name.includes('espresso') || name.includes('latte');
+          case 'punch':
+            return name.includes('punch');
+          default:
+            return true;
+        }
+      })
+    : items;
+
+  // Render the full component with real data
   return (
     <div className="p-3">
+      {isDrinksCategory && <DrinkSubmenu />}
+      
       <div className="grid grid-cols-1 gap-4">
-        {items.map((item: any) => (
-          <MenuItem 
-            key={item.id}
-            id={item.id}
-            name={item.name}
-            description={item.description}
-            price={item.price}
-            imageUrl={item.imageUrl}
-            available={item.available}
-            categoryId={item.categoryId}
-          />
-        ))}
+        {filteredItems.length === 0 ? (
+          <div className="text-center py-10">
+            <p className="text-neutral-500">
+              {isDrinksCategory && drinkType 
+                ? `No ${drinkType} drinks found.` 
+                : "No items found in this category."}
+            </p>
+          </div>
+        ) : (
+          filteredItems.map((item: any) => (
+            <MenuItem 
+              key={item.id}
+              id={item.id}
+              name={item.name}
+              description={item.description}
+              price={item.price}
+              imageUrl={item.imageUrl}
+              available={item.available}
+              categoryId={item.categoryId}
+            />
+          ))
+        )}
       </div>
     </div>
   );
