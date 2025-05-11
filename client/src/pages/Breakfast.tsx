@@ -1,50 +1,25 @@
-
 import Layout from "@/components/Layout";
-import MenuItem from "@/components/MenuItem";
-import { useQuery } from "@tanstack/react-query";
 
 export default function Breakfast() {
-  const { data: menuItems = [] } = useQuery({
-    queryKey: ["menuItems"],
-    queryFn: async () => {
-      const response = await fetch("/api/categories/1/menu-items");
-      return response.json();
-    },
-  });
-
   return (
     <Layout>
       <div className="p-6">
         <h1 className="text-3xl font-bold mb-6">Breakfast Menu</h1>
         <p className="text-gray-600 mb-8">Served until 11:00 AM</p>
-        <div className="grid grid-cols-1 gap-4">
-          <MenuItem
-            id={1}
-            name="Classic American Breakfast"
-            description="Two eggs any style, bacon or sausage, hash browns, and toast"
-            price={12.99}
-            imageUrl="https://images.unsplash.com/photo-1533089860892-a7c6f0a88666"
-            available={true}
-            categoryId={1}
-          />
-          <MenuItem
-            id={2}
-            name="Belgian Waffles"
-            description="Served with maple syrup, whipped cream, and fresh berries"
-            price={10.99}
-            imageUrl="https://images.unsplash.com/photo-1562376552-0d160a2f238d"
-            available={true}
-            categoryId={1}
-          />
-          <MenuItem
-            id={3}
-            name="Eggs Benedict"
-            description="Poached eggs on English muffin with hollandaise sauce"
-            price={14.99}
-            imageUrl="https://images.unsplash.com/photo-1608039829572-78524f79c4c7"
-            available={true}
-            categoryId={1}
-          />
+
+        <div className="space-y-4">
+          {[
+            { name: "Farm Fresh Eggs (Any Style)", price: 8.99 },
+            { name: "Premium Pork Sausages", price: 7.99 },
+            { name: "Homemade Fried Bakes", price: 6.99 },
+            { name: "Artisan Toast Bread with Butter", price: 4.99 },
+            { name: "Crispy Bacon Strips", price: 7.99 },
+          ].map((item) => (
+            <div key={item.name} className="flex justify-between items-center border-b border-gray-200 pb-2">
+              <span className="text-lg text-gray-800">{item.name}</span>
+              <span className="text-lg font-medium text-gray-900">${item.price.toFixed(2)}</span>
+            </div>
+          ))}
         </div>
       </div>
     </Layout>
