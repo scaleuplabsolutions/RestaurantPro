@@ -127,7 +127,7 @@ export default function MenuItems({ categoryId }: MenuItemsProps) {
 
   if (!items || items.length === 0) {
     // Show demo items for the selected category
-    const demoForCategory = categoryId ? demoItems[categoryId] : Object.values(demoItems).flat();
+    const demoForCategory = categoryId ? demoItems[categoryId] : [];
     
     if (demoForCategory && demoForCategory.length > 0) {
       return (
