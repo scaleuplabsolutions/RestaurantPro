@@ -23,44 +23,28 @@ export default function Home() {
       <SpecialBanner />
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
-        <div 
-          onClick={() => {
-            setSelectedCategory(1); // Assuming 1 is breakfast category ID
-            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-          }}
+        <a 
+          href="/breakfast"
           className="cursor-pointer bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg shadow-md p-6 hover:shadow-xl transition-all transform hover:-translate-y-1 border-2 border-orange-300"
         >
-          <h2 className="text-2xl font-semibold mb-2 text-orange-800">Breakfast</h2>
-          <p className="text-orange-700 mb-4">Start your day with our delicious breakfast options</p>
-          <p className="text-sm text-orange-600">Served until 11:00 AM</p>
-          <div className="mt-4 text-orange-700">
-            <span className="flex items-center">
-              View Menu 
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </span>
+          <div className="flex items-center justify-between">
+            <h2 className="text-2xl font-semibold text-orange-800">Breakfast</h2>
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-orange-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
           </div>
-        </div>
-        <div 
-          onClick={() => {
-            setSelectedCategory(2); // Assuming 2 is lunch category ID
-            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-          }}
+        </a>
+        <a 
+          href="/lunch"
           className="cursor-pointer bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg shadow-md p-6 hover:shadow-xl transition-all transform hover:-translate-y-1 border-2 border-blue-300"
         >
-          <h2 className="text-2xl font-semibold mb-2 text-blue-800">Lunch</h2>
-          <p className="text-blue-700 mb-4">Enjoy our fresh and satisfying lunch menu</p>
-          <p className="text-sm text-blue-600">Served 11:00 AM - 3:00 PM</p>
-          <div className="mt-4 text-blue-700">
-            <span className="flex items-center">
-              View Menu 
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </span>
+          <div className="flex items-center justify-between">
+            <h2 className="text-2xl font-semibold text-blue-800">Lunch</h2>
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
           </div>
-        </div>
+        </a>
       </div>
       
       <MenuSection onCategoryChange={setSelectedCategory} />

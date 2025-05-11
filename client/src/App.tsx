@@ -11,6 +11,8 @@ import Order from "@/pages/Order";
 import Reservation from "@/pages/Reservation";
 import Contact from "@/pages/Contact";
 import Profile from "@/pages/Profile";
+import Breakfast from './pages/Breakfast';
+import Lunch from './pages/Lunch';
 import AdminDashboard from "@/pages/admin/Dashboard";
 import AdminMenuManagement from "@/pages/admin/MenuManagement";
 import AdminOrderManagement from "@/pages/admin/OrderManagement";
@@ -25,13 +27,15 @@ function Router() {
       <Route path="/reservation" component={Reservation} />
       <Route path="/contact" component={Contact} />
       <Route path="/profile" component={Profile} />
-      
+      <Route path="/breakfast" component={Breakfast} />
+      <Route path="/lunch" component={Lunch} />
+
       {/* Admin Routes */}
       <Route path="/admin" component={AdminDashboard} />
       <Route path="/admin/menu" component={AdminMenuManagement} />
       <Route path="/admin/orders" component={AdminOrderManagement} />
       <Route path="/admin/settings" component={AdminSettings} />
-      
+
       {/* Fallback to 404 */}
       <Route component={NotFound} />
     </Switch>
