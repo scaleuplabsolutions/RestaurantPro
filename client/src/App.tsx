@@ -17,6 +17,7 @@ import AdminDashboard from "@/pages/admin/Dashboard";
 import AdminMenuManagement from "@/pages/admin/MenuManagement";
 import AdminOrderManagement from "@/pages/admin/OrderManagement";
 import AdminSettings from "@/pages/admin/SettingsPage";
+import Combos from "@/pages/Combos";
 
 function Router() {
   return (
