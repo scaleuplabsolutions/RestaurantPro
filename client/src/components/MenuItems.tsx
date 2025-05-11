@@ -207,6 +207,31 @@ export default function MenuItems({ categoryId }: MenuItemsProps) {
     const demoForCategory = categoryId ? demoItems[categoryId] : [];
     
     if (demoForCategory && demoForCategory.length > 0) {
+      // Special handling for drinks category (id: 4)
+      if (categoryId === 4) {
+        const drinkCategories = {
+          'Alcohol': demoForCategory.filter(item => item.subcategory === 'Alcohol'),
+          'Non-Alcohol': demoForCategory.filter(item => item.subcategory === 'Non-Alcohol'),
+          'Tea/Coffee': demoForCategory.filter(item => item.subcategory === 'Tea/Coffee'),
+          'Punch': demoForCategory.filter(item => item.subcategory === 'Punch')
+        };
+
+        return (
+          <div className="p-3">
+            {Object.entries(drinkCategories).map(([category, items]) => (
+              <div key={category} className="mb-6">
+                <h3 className="text-lg font-semibold mb-3 text-purple-800">{category}</h3>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                  {items.map((item: any) => (
+                    <MenuItem key={item.id} {...item} isCompact={true} />
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        );
+      }
+
       return (
         <div className="p-3">
           <div className="grid grid-cols-1 gap-4">

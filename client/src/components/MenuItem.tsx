@@ -12,6 +12,7 @@ interface MenuItemProps {
   imageUrl?: string;
   available: boolean;
   categoryId: number;
+  isCompact?: boolean;
 }
 
 export default function MenuItem({
@@ -50,12 +51,12 @@ export default function MenuItem({
   const defaultImage = "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=300";
 
   return (
-    <Card className="overflow-hidden shadow-sm">
+    <Card className={`overflow-hidden shadow-sm ${isCompact ? 'h-full' : ''}`}>
       <div className="relative">
         <img 
           src={imageUrl || defaultImage} 
           alt={name} 
-          className="w-full h-40 object-cover"
+          className={`w-full ${isCompact ? 'h-24' : 'h-40'} object-cover`}
         />
         {!available && (
           <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
