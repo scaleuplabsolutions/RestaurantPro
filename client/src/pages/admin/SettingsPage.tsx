@@ -12,7 +12,8 @@ import {
   Palette, 
   Clock, 
   CreditCard, 
-  Upload 
+  Upload,
+  LogOut
 } from "lucide-react";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
@@ -407,6 +408,16 @@ export default function AdminSettings() {
           </div>
         </TabsContent>
       </Tabs>
+      
+      <div className="mt-6 mb-20">
+        <Button 
+          onClick={logout}
+          className="w-full py-3 bg-red-500 hover:bg-red-600 text-white font-medium"
+        >
+          <LogOut className="mr-2 h-5 w-5" />
+          Logout
+        </Button>
+      </div>
       
       <AdminNavigation />
     </div>
