@@ -221,7 +221,7 @@ export default function MenuItems({ categoryId }: MenuItemsProps) {
             {Object.entries(drinkCategories).map(([category, items]) => (
               <div key={category} className="mb-6">
                 <h3 className="text-lg font-semibold mb-3 text-purple-800">{category}</h3>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {items.map((item: any) => (
                     <MenuItem key={item.id} {...item} isCompact={true} />
                   ))}
