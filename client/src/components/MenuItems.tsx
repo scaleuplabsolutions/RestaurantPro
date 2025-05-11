@@ -12,7 +12,7 @@ type DrinkType = 'alcohol' | 'non-alcohol' | 'tea-coffee' | 'punch' | null;
 
 export default function MenuItems({ categoryId }: MenuItemsProps) {
   const [drinkType, setDrinkType] = useState<DrinkType>(null);
-  
+
   // Fetch all menu items
   const { data: allItems, isLoading: isLoadingAll } = useQuery({
     queryKey: ['/api/menu-items'],
@@ -27,10 +27,10 @@ export default function MenuItems({ categoryId }: MenuItemsProps) {
 
   const isLoading = categoryId === null ? isLoadingAll : isLoadingCategory;
   const items = categoryId === null ? allItems : categoryItems;
-  
+
   // Check if this is the Drinks category (ID: 4)
   const isDrinksCategory = categoryId === 4;
-  
+
   // Define drink subcategories with their UI elements
   const drinkSubcategories = [
     { id: 'alcohol' as DrinkType, name: 'Alcohol', icon: '🍷' },
@@ -219,7 +219,7 @@ export default function MenuItems({ categoryId }: MenuItemsProps) {
   // Render the drinks submenu
   const DrinkSubmenu = () => {
     if (!isDrinksCategory) return null;
-    
+
     return (
       <div className="mb-4">
         <h3 className="text-lg font-semibold mb-3 text-gray-800">Drink Types</h3>
@@ -247,7 +247,7 @@ export default function MenuItems({ categoryId }: MenuItemsProps) {
   // Use demo items if no real items are available
   if (!items || items.length === 0) {
     const demoForCategory = categoryId ? demoItems[categoryId] || [] : [];
-    
+
     if (demoForCategory.length === 0) {
       return (
         <div className="p-3">
@@ -258,16 +258,16 @@ export default function MenuItems({ categoryId }: MenuItemsProps) {
         </div>
       );
     }
-    
+
     // Filter demo items by drink type if applicable
     const filteredDemoItems = isDrinksCategory && drinkType
       ? demoForCategory.filter(item => item.subcategory === drinkType)
       : demoForCategory;
-      
+
     return (
       <div className="p-3">
         {isDrinksCategory && <DrinkSubmenu />}
-        
+
         <div className="grid grid-cols-1 gap-4">
           {filteredDemoItems.length === 0 ? (
             <div className="text-center py-10">
@@ -280,7 +280,7 @@ export default function MenuItems({ categoryId }: MenuItemsProps) {
           ) : (
             filteredDemoItems.map((item: any) => (
               <MenuItem 
-                key={item.id}
+                key={item.id} 
                 id={item.id}
                 name={item.name}
                 description={item.description}
@@ -288,6 +288,7 @@ export default function MenuItems({ categoryId }: MenuItemsProps) {
                 imageUrl={item.imageUrl}
                 available={item.available}
                 categoryId={item.categoryId}
+                isCompact={true}
               />
             ))
           )}
@@ -301,7 +302,7 @@ export default function MenuItems({ categoryId }: MenuItemsProps) {
     ? items.filter((item: any) => {
         const name = item.name.toLowerCase();
         const description = (item.description || '').toLowerCase();
-        
+
         switch(drinkType) {
           case 'alcohol':
             return name.includes('wine') || name.includes('beer') || 
@@ -325,7 +326,7 @@ export default function MenuItems({ categoryId }: MenuItemsProps) {
   return (
     <div className="p-3">
       {isDrinksCategory && <DrinkSubmenu />}
-      
+
       <div className="grid grid-cols-1 gap-4">
         {filteredItems.length === 0 ? (
           <div className="text-center py-10">
@@ -346,6 +347,7 @@ export default function MenuItems({ categoryId }: MenuItemsProps) {
               imageUrl={item.imageUrl}
               available={item.available}
               categoryId={item.categoryId}
+              isCompact={true}
             />
           ))
         )}

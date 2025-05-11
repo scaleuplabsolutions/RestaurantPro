@@ -22,6 +22,7 @@ export default function MenuItem({
   price,
   imageUrl,
   available,
+  categoryId,
   isCompact = false,
 }: MenuItemProps) {
   const { addItem } = useCart();
