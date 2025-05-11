@@ -6,6 +6,15 @@ export default function Combos() {
   return (
     <Layout>
       <div className="p-6">
+        <button 
+          onClick={() => window.history.back()}
+          className="mb-4 flex items-center gap-2 text-neutral-600 hover:text-neutral-800"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+          Back to Lunch Menu
+        </button>
         <h1 className="text-3xl font-bold mb-6">Lunch Combos</h1>
         <p className="text-gray-600 mb-8">Available daily from 11:00 AM - 3:00 PM</p>
         <div className="grid grid-cols-1 gap-4">
