@@ -208,14 +208,14 @@ export default function MenuItems({ categoryId }: MenuItemsProps) {
     
     if (demoForCategory && demoForCategory.length > 0) {
       // Special handling for drinks category (id: 4)
-      if (categoryId === 4) {
-        const drinkCategories = {
-          'Alcohol': demoForCategory.filter(item => item.subcategory === 'Alcohol'),
-          'Non-Alcohol': demoForCategory.filter(item => item.subcategory === 'Non-Alcohol'),
-          'Tea/Coffee': demoForCategory.filter(item => item.subcategory === 'Tea/Coffee'),
-          'Punch': demoForCategory.filter(item => item.subcategory === 'Punch')
-        };
+      const drinkCategories = {
+        'Alcohol': demoItems[4].filter(item => item.subcategory === 'Alcohol'),
+        'Non-Alcohol': demoItems[4].filter(item => item.subcategory === 'Non-Alcohol'),
+        'Tea/Coffee': demoItems[4].filter(item => item.subcategory === 'Tea/Coffee'),
+        'Punch': demoItems[4].filter(item => item.subcategory === 'Punch')
+      };
 
+      if (categoryId === 4) {
         return (
           <div className="p-3">
             {Object.entries(drinkCategories).map(([category, items]) => (
@@ -234,6 +234,23 @@ export default function MenuItems({ categoryId }: MenuItemsProps) {
 
       return (
         <div className="p-3">
+          {categoryId === 1 && (
+            <div className="mb-6">
+              <h3 className="text-lg font-semibold mb-3">Drinks Categories</h3>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+                {Object.entries(drinkCategories).map(([category, items]) => (
+                  <div
+                    key={category}
+                    className="p-3 bg-purple-50 rounded-lg cursor-pointer hover:bg-purple-100 transition-colors"
+                    onClick={() => onCategoryChange(4)}
+                  >
+                    <h4 className="font-medium text-purple-800">{category}</h4>
+                    <p className="text-sm text-purple-600">{items.length} items</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
           <div className="grid grid-cols-1 gap-4">
             {demoForCategory.map((item: any) => (
               <MenuItem key={item.id} {...item} />
