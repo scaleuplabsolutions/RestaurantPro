@@ -22,6 +22,7 @@ export default function MenuItem({
   price,
   imageUrl,
   available,
+  isCompact = false,
 }: MenuItemProps) {
   const { addItem } = useCart();
   const [isAdding, setIsAdding] = useState(false);
@@ -37,7 +38,7 @@ export default function MenuItem({
       available,
       categoryId: 0,
     });
-    
+
     setTimeout(() => {
       setIsAdding(false);
     }, 500);
