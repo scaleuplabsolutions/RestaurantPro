@@ -15,6 +15,7 @@ export default function MenuItems({ categoryId }: MenuItemsProps) {
   // Fetch category-specific menu items if a category is selected
   const { data: categoryItems, isLoading: isLoadingCategory } = useQuery({
     queryKey: ['/api/categories', categoryId, 'menu-items'],
+    queryFn: () => fetch(`/api/categories/${categoryId}/menu-items`).then(res => res.json()),
     enabled: categoryId !== null,
   });
 
