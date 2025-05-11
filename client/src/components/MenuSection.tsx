@@ -31,20 +31,20 @@ export default function MenuSection({ onCategoryChange }: MenuSectionProps) {
 
   return (
     <div className="p-4">
-      <div className="flex gap-4 overflow-x-auto">
+      <div className="flex gap-2 justify-between">
         {categories && categories.map((category: any) => (
           <button
             key={category.id}
             onClick={() => handleCategoryClick(category.id)}
             className={`
-              flex-shrink-0 w-40 h-16 rounded-lg shadow-md transition-all transform hover:-translate-y-1
+              flex-1 h-12 rounded-lg shadow-md transition-all transform hover:-translate-y-1
               ${activeCategory === category.id 
                 ? 'bg-gradient-to-br from-purple-100 to-purple-200 border-2 border-purple-300'
                 : 'bg-gradient-to-br from-gray-100 to-gray-200 border-2 border-gray-300'}
             `}
           >
-            <div className="flex items-center justify-between p-4">
-              <h2 className={`font-semibold ${activeCategory === category.id ? 'text-purple-800' : 'text-gray-800'}`}>
+            <div className="flex items-center justify-center">
+              <h2 className={`font-semibold text-sm ${activeCategory === category.id ? 'text-purple-800' : 'text-gray-800'}`}>
                 {category.name}
               </h2>
             </div>
