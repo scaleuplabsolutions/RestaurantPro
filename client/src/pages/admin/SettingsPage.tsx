@@ -39,7 +39,7 @@ const restaurantSettingsSchema = z.object({
 type RestaurantSettingsValues = z.infer<typeof restaurantSettingsSchema>;
 
 export default function AdminSettings() {
-  const { isAdmin, isAuthenticated } = useAuth();
+  const { isAdmin, isAuthenticated, logout } = useAuth();
   const [, setLocation] = useLocation();
   const queryClient = useQueryClient();
   const { toast } = useToast();
