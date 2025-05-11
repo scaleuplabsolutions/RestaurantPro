@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import MenuItem from "./MenuItem";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -7,6 +8,8 @@ interface MenuItemsProps {
 }
 
 export default function MenuItems({ categoryId }: MenuItemsProps) {
+  const [drinkType, setDrinkType] = useState<string | null>(null);
+  
   // Fetch all menu items
   const { data: allItems, isLoading: isLoadingAll } = useQuery({
     queryKey: ['/api/menu-items'],
@@ -21,6 +24,9 @@ export default function MenuItems({ categoryId }: MenuItemsProps) {
 
   const isLoading = categoryId === null ? isLoadingAll : isLoadingCategory;
   const items = categoryId === null ? allItems : categoryItems;
+  
+  // Check if this is the Drinks category (ID: 4)
+  const isDrinksCategory = categoryId === 4;
 
   if (isLoading) {
     return (
@@ -43,7 +49,7 @@ export default function MenuItems({ categoryId }: MenuItemsProps) {
   }
 
   // Demo menu items for each category
-  const demoItems = {
+  const demoItems: Record<number, Array<any>> = {
     1: [ // Starters
       {
         id: 101,
@@ -204,15 +210,16 @@ export default function MenuItems({ categoryId }: MenuItemsProps) {
 
   if (!items || items.length === 0) {
     // Show demo items for the selected category
-    const demoForCategory = categoryId ? demoItems[categoryId] : [];
+    const demoForCategory = categoryId ? demoItems[categoryId as keyof typeof demoItems] : [];
     
     if (demoForCategory && demoForCategory.length > 0) {
       // Special handling for drinks category (id: 4)
+      const drinkItems = demoItems[4] || [];
       const drinkCategories = {
-        'Alcohol': demoItems[4].filter(item => item.subcategory === 'Alcohol'),
-        'Non-Alcohol': demoItems[4].filter(item => item.subcategory === 'Non-Alcohol'),
-        'Tea/Coffee': demoItems[4].filter(item => item.subcategory === 'Tea/Coffee'),
-        'Punch': demoItems[4].filter(item => item.subcategory === 'Punch')
+        'Alcohol': drinkItems.filter(item => item.subcategory === 'Alcohol'),
+        'Non-Alcohol': drinkItems.filter(item => item.subcategory === 'Non-Alcohol'),
+        'Tea/Coffee': drinkItems.filter(item => item.subcategory === 'Tea/Coffee'),
+        'Punch': drinkItems.filter(item => item.subcategory === 'Punch')
       };
 
       if (categoryId === 4) {
